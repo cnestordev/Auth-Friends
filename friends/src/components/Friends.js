@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { axiosWithAuth } from '../utils/axiosWithAuth'
+import { Box } from '../styled/styles'
+
+import AddUser from './AddUser'
 
 function Friends(props) {
 
@@ -14,11 +17,11 @@ function Friends(props) {
             .catch(err => {
                 console.log(err)
             })
-    }, [])
+    }, [friends])
 
 
     const friendsList = friends.map(friend => (
-        <div key={friend.id}>
+        <div className="box" key={friend.id}>
             <h3>{friend.name}</h3>
             <h4>{friend.age}</h4>
             <h5>{friend.email}</h5>
@@ -26,9 +29,12 @@ function Friends(props) {
     ))
 
     return (
-        <div>
-            {friendsList}
-        </div>
+        <Box>
+            <AddUser />
+            <div className="flexContainer">
+                {friendsList}
+            </div>
+        </Box>
     )
 }
 

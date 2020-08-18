@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { axiosWithAuth } from '../utils/axiosWithAuth'
+import { Container } from '../styled/styles'
 
 function Login(props) {
 
@@ -39,15 +40,15 @@ function Login(props) {
     }
 
     return (
-        <div>
+        <Container>
             <h1>Login in</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} autoComplete="off">
                 <input onChange={handleChange} value={credentials.username} name="username" type="text" placeholder="username" />
                 <input onChange={handleChange} value={credentials.password} name="password" type="password" placeholder="password" />
                 <button>{isLoading ? 'FETCHING' : 'Submit'}</button>
                 {error && <h3>{error}</h3>}
             </form>
-        </div>
+        </Container>
     )
 }
 
