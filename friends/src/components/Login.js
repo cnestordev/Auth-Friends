@@ -7,8 +7,6 @@ function Login(props) {
 
     const history = useHistory()
 
-    console.log(history)
-
     const [credentials, setCredentials] = useState({
         username: '',
         password: ''
@@ -26,18 +24,19 @@ function Login(props) {
 
     const handleSubmit = e => {
         e.preventDefault()
+        setIsLoading(true)
         axiosWithAuth()
             .post('/api/login', credentials)
             .then(res => {
                 localStorage.setItem('token', res.data.payload)
+                setIsLoading(false)
                 history.push('/friends')
             })
             .catch(err => {
                 setError(err.message)
+                setIsLoading(false)
             })
     }
-
-    if (isLoading) return <h2>Loading...</h2>
 
     return (
         <div>
@@ -45,7 +44,7 @@ function Login(props) {
             <form onSubmit={handleSubmit}>
                 <input onChange={handleChange} value={credentials.username} name="username" type="text" placeholder="username" />
                 <input onChange={handleChange} value={credentials.password} name="password" type="password" placeholder="password" />
-                <button>Log in</button>
+                <button>{isLoading ? 'FETCHING' : 'Submit'}</button>
                 {error && <h3>{error}</h3>}
             </form>
         </div>

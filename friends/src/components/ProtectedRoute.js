@@ -12,7 +12,6 @@ function ProtectedRoute({ component, ...rest }) {
             }
         }} />
     )
-    // return isAuthenticated ? <Component /> : <Redirect to="/" />
 }
 
 export default ProtectedRoute
